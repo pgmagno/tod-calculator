@@ -342,34 +342,58 @@ function showCurrentTime () {
 
 showCurrentTime();
 
+function showDate () {
+
+    const date = new Date();
+    
+    var options = { month: 'long'};
+    let month = new Intl.DateTimeFormat('en-US', options).format(date);
+    month = month.slice(0,3).toLocaleUpperCase();    
+    
+    let year = date.getFullYear();
+    year = String(year);
+    year = year.slice(-2);
+
+    const day = date.getDate();
+
+    const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    const dayOfWeek = weekdays[date.getDay()].slice(0,3).toLocaleUpperCase();
+
+    const dateDisplay = document.querySelector('.date');
+    dateDisplay.textContent = `${dayOfWeek} \u00A0 ${month}, ${day} \u00A0 ${year}`;
+}
+
+showDate();
+
+
+
 const modeBtn = document.querySelector('.mode-btn');
 const timeDisplayOnOff = document.querySelector('.time');
 const calculatorDisplayOnOff = document.querySelector('.calculator-display');
 
 
-//modeBtn.addEventListener('click', () => {
+modeBtn.addEventListener('click', () => {
     // toggles would be dependent on CSS order of statements, best to 
     // do it manually
 
-   // timeDisplayOnOff.classList.toggle('off');
-   // timeDisplayOnOff.classList.toggle('on');
+   timeDisplayOnOff.classList.toggle('off');
+   timeDisplayOnOff.classList.toggle('on');
 
-   // calculatorDisplayOnOff.classList.toggle('off');   
-   // calculatorDisplayOnOff.classList.toggle('on');
-//});
+   calculatorDisplayOnOff.classList.toggle('off');   
+   calculatorDisplayOnOff.classList.toggle('on');
+});
 
 function turnOff () {
     const bodyElement = document.querySelector('.body');
     const displayScreen = document.querySelector('.display-div');
 
     const title = document.querySelector('h1');
-    if(title.textContent === 'Clock') {
+    if(title.textContent === 'Paulo\'s Calculator Watch') {
         title.textContent = "It\'s hard to see. Press the light button";
     } else {
         title.textContent = "Paulo's Calculator Watch";
     }
-    
-    title.style['font-size'] = '30px';
 
     bodyElement.classList.toggle('lights-off');
     displayScreen.classList.toggle('dark-screen');

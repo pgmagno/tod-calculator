@@ -17,29 +17,34 @@
 <body class='body'>
 
     <div class='top-bar'>
-        <h1>Clock</h1>
-        <span class='sun-moon day'>🌞</span>
-        <span class='sun-moon night'>🌚</span>
+        <h1>Paulo's Calculator Watch</h1>
+        <span class='sun-moon on'>🌞</span>
+        <span class='sun-moon off'>🌚</span>
     </div>
+
+    
 
     <button class='mode-btn'>Mode</button>
     
     <div class='watch-div'>
+        
         <div class='display-outer-div'>
-
+            
             <div class='top-div'>
-<span class='casio'>PAULO</span>
-<span class='data-bank'>DATA BANK <span class='number-150'>150</span></span>
-<span class='illuminator'> ◀ ILLUMINATOR ▶</illuminator></span>
+                <span class='casio'>PAULO</span>
+                <span class='data-bank'>DATA BANK <span class='number-150'>150</span></span>
+                <span class='illuminator'> ◀ ILLUMINATOR ▶</illuminator></span>
             </div>
             <div class='display-div'>
-                <div class='date'>DATA</div>
-                <div class=''>
-                    <span class="time">
-                    </span>
-                    <input type="text" value='0' class='display-value calculator-display'>
                 
-                </div>
+                
+                <div class='date'></div>
+                
+                    <span class="time on">
+                    </span>
+                    <input disabled type="text" value='0' class='display-value calculator-display off'>
+                
+                
                 
             </div>
 
@@ -48,6 +53,7 @@
         <div class='middle-div'>
             <div class='memory-protect-div'>MEMORY PROTECT</div> 
             <div class='tri-1'></div>
+            
             <div class='tri-2'></div>
             <div class="light"><span>LIGHT</span></div>
         </div>
@@ -76,7 +82,7 @@
             <button class="grid-item btn btn-dot">.</button>
             <button class="grid-item btn btn-number btn-0">0</button>
             <button class="grid-item btn btn-equals">=</button>
-            <button class="grid-item btn btn-division">/</button>
+            <button class="grid-item btn btn-division">÷</button>
         </div>
     </div>
 
