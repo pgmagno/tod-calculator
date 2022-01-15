@@ -8,49 +8,79 @@
     <title>Calculator</title>
     <script src="./index.js" defer></script>
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Hairline&family=Orbitron:wght@900&family=Rationale&display=swap" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/segment7" type="text/css"/>
 </head>
 
-<body>
+<body class='body'>
 
-    <div class='main-app'>
-        <div class='display'>            
-            <input type="number" value='0' class='display-value'>
-        </div>
-
-        <div class="keys">
-
-            <div class="numbers">
-              
-
-                <button class="btn btn-sign">+/-</button>
-                <button class="btn btn-number btn-0">0</button>
-                <button class="btn btn-dot">.</button>
-                <button class="btn btn-number btn-1">1</button>
-                <button class="btn btn-number btn-2">2</button>
-                <button class="btn btn-number btn-3">3</button>
-                <button class="btn btn-number btn-4">4</button>
-                <button class="btn btn-number btn-5">5</button>
-                <button class="btn btn-number btn-6">6</button>
-                <button class="btn btn-number btn-7">7</button>
-                <button class="btn btn-number btn-8">8</button>
-                <button class="btn btn-number btn-9">9</button>
-
-                <button class="btn btn-clear">Clear</button>
-                <button class="btn btn-backspace">Backspace</button>
-            </div>
-
-            <div class="operators">
-                <button class="btn btn-division">/</button>
-                <button class="btn btn-multiplication">x</button>
-                <button class="btn btn-subtraction">-</button>
-                <button class="btn btn-addition">+</button>
-                <button class="btn btn-equals">=</button>
-
-            </div>
-
-        </div>
-
+    <div class='top-bar'>
+        <h1>Clock</h1>
+        <span class='sun-moon day'>🌞</span>
+        <span class='sun-moon night'>🌚</span>
     </div>
+
+    <button class='mode-btn'>Mode</button>
+    
+    <div class='watch-div'>
+        <div class='display-outer-div'>
+
+            <div class='top-div'>
+<span class='casio'>PAULO</span>
+<span class='data-bank'>DATA BANK <span class='number-150'>150</span></span>
+<span class='illuminator'> ◀ ILLUMINATOR ▶</illuminator></span>
+            </div>
+            <div class='display-div'>
+                <div class='date'>DATA</div>
+                <div class=''>
+                    <span class="time">
+                    </span>
+                    <input type="text" value='0' class='display-value calculator-display'>
+                
+                </div>
+                
+            </div>
+
+            
+        </div>
+        <div class='middle-div'>
+            <div class='memory-protect-div'>MEMORY PROTECT</div> 
+            <div class='tri-1'></div>
+            <div class='tri-2'></div>
+            <div class="light"><span>LIGHT</span></div>
+        </div>
+
+        <div class='keyboard'>
+            <button class="grid-item btn btn-top btn-clear-all">C</button>
+            <button class="grid-item btn btn-top btn-clear-entry">CE</button>
+            <button class="grid-item btn btn-top btn-backspace"> ⬅ </button>           
+            <button class="grid-item btn btn-top btn-sign">+/-</button>
+
+            <button class="grid-item btn btn-number btn-7">7</button>
+            <button class="grid-item btn btn-number btn-8">8</button>
+            <button class="grid-item btn btn-number btn-9">9</button>
+            <button class="grid-item btn btn-addition">+</button>
+
+            <button class="grid-item btn btn-number btn-4">4</button>
+            <button class="grid-item btn btn-number btn-5">5</button>
+            <button class="grid-item btn btn-number btn-6">6</button>
+            <button class="grid-item btn btn-subtraction">-</button>
+
+            <button class="grid-item btn btn-number btn-1">1</button>
+            <button class="grid-item btn btn-number btn-2">2</button>
+            <button class="grid-item btn btn-number btn-3">3</button>
+            <button class="grid-item btn btn-multiplication">x</button>            
+            
+            <button class="grid-item btn btn-dot">.</button>
+            <button class="grid-item btn btn-number btn-0">0</button>
+            <button class="grid-item btn btn-equals">=</button>
+            <button class="grid-item btn btn-division">/</button>
+        </div>
+    </div>
+
+
 
 
 
