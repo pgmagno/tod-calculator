@@ -8,7 +8,7 @@ h1 {
     font-family: 'Digital Numbers Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('Digital Numbers Regular'), url('/DigitalNumbers-Regular.woff') format('woff');
+    src: local('Digital Numbers Regular'), url('/css/DigitalNumbers-Regular.woff') format('woff');
     }
 
 .time {
@@ -27,18 +27,27 @@ body {
 }
 
 .watch-div {
-    margin: auto;
+    margin: 50px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 400px;
-    background-color: rgb(90, 90,90) ;
+    background-color: rgb(90, 90,90);
     height: 650px;
     border-radius: 40px;
     box-shadow: 10px 10px 25px 1px rgb(90, 90,90);
+    transition: background-color 1s, box-shadow 1s;
+}
+.no-shadow{
+    box-shadow: none;
+    background-color: black;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
 
 .top-div {
     height: 50px;
@@ -53,6 +62,7 @@ body {
 .casio {
     font-family: "Orbitron";
     font-size: 25px;
+    cursor: pointer;
 }
 .data-bank {
     color: gold;
@@ -194,8 +204,17 @@ body {
     letter-spacing: 3px;
 }
 
+.btn:active{
+    background-color: rgb(26, 36, 36);
+    color: rgb(155, 155, 155);
+    box-shadow: -1px -1px 10px inset black;
+}
+
 .btn-top {
     background-color: steelblue;
+}
+.btn-top:active {
+    background-color: rgb(0, 33, 59);
 }
 
 .lights-off {
@@ -230,6 +249,31 @@ h1 {
     background-color: darkturquoise;
     box-shadow: 1px 1px 400px 100px darkturquoise ;
 }
+.backlight-red {
+    z-index: 3;
+    animation: red-alarm 0.5s ease-in-out 60 forwards;
+}
+
+@keyframes red-alarm {
+    0% {
+        background-color: black;
+        color: red;
+        box-shadow: 1px 1px 400px 100px none;
+    }
+    50% {
+        background-color: red;
+        color: black;
+            box-shadow: 1px 1px 400px 100px red ;
+    }
+    100% {
+        background-color: black;
+        color: black;
+        box-shadow: 1px 1px 400px 100px none;            
+    }
+
+}
+    
+
 
 .calculator-display {
     padding: 0;
@@ -251,3 +295,56 @@ h1 {
     text-align: center;
 
 }
+.sun-moon {
+    cursor: pointer;
+}
+
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.3); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }
+
+
+.button-watch-assembly {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mode-btn {
+    background-color: black;
+    color:white;
+    padding: 15px 0;
+    width: 20px;
+    height: 50px;
+    border-radius: 15px 0 0 15px;
+    border-right: none;
+    position: relative;
+    bottom: 127px;
+}
+ 
+.btn-vertical-text {
+    position: relative;
+    right: 10px;
+    color: white;
+    font-size: 15px;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+}
+.flex-span-display {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

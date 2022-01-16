@@ -22,6 +22,7 @@ function multiply(a, b) {
 function divide(a, b) {
 
     if (b == 0) {
+        errorAlarm();
         return 'Error!';
     }
 
@@ -308,7 +309,7 @@ btnDivide.addEventListener('click', () => {
 });
 
 
-
+///////////////////   CLOCK      ///////////////////////
 
 const showTime = document.querySelector('.active-time');
 const timeDisplay = document.querySelector('.time');
@@ -366,7 +367,7 @@ function showDate () {
 
 showDate();
 
-
+///////////////////////////// 
 
 const modeBtn = document.querySelector('.mode-btn');
 const timeDisplayOnOff = document.querySelector('.time');
@@ -377,26 +378,35 @@ modeBtn.addEventListener('click', () => {
     // toggles would be dependent on CSS order of statements, best to 
     // do it manually
 
-   timeDisplayOnOff.classList.toggle('off');
-   timeDisplayOnOff.classList.toggle('on');
+    clearAll();
+    timeDisplayOnOff.classList.toggle('off');
+    timeDisplayOnOff.classList.toggle('on');
 
-   calculatorDisplayOnOff.classList.toggle('off');   
-   calculatorDisplayOnOff.classList.toggle('on');
+    calculatorDisplayOnOff.classList.toggle('off');   
+    calculatorDisplayOnOff.classList.toggle('on');
 });
 
-function turnOff () {
+function lightsOut () {
     const bodyElement = document.querySelector('.body');
     const displayScreen = document.querySelector('.display-div');
-
-    const title = document.querySelector('h1');
-    if(title.textContent === 'Paulo\'s Calculator Watch') {
-        title.textContent = "It\'s hard to see. Press the light button";
-    } else {
-        title.textContent = "Paulo's Calculator Watch";
-    }
+    const watchBackShadow = document.querySelector('.watch-div');
 
     bodyElement.classList.toggle('lights-off');
     displayScreen.classList.toggle('dark-screen');
+    watchBackShadow.classList.toggle('no-shadow');
+}
+
+function replaceTitle (msg) {
+
+    const title = document.querySelector('h1');
+    if(title.textContent === 'Paulo\'s Calculator Watch') {
+        title.textContent = msg;
+    } else {
+        title.textContent = "Paulo's Calculator Watch";
+    }
+}
+
+function toggleDarkModeIcon () {
 
     const sunMoon = document.querySelector('.sun-moon');
     if (sunMoon.textContent === '🌞') {
@@ -405,6 +415,13 @@ function turnOff () {
         sunMoon.textContent = '🌞';
     }
 
+}
+
+function turnOff () {
+    
+    replaceTitle("It\'s hard to see. Press the light button");
+    toggleDarkModeIcon();
+    lightsOut();
 }
 
 
@@ -426,9 +443,88 @@ function pressLightBtn () {
 
     const displayScreen = document.querySelector('.display-div');
     displayScreen.classList.toggle('backlight');
-
     triTwo.classList.toggle('tri-2-pressed');
 
     lightBtn.classList.toggle('light-pressed');
 }
 
+
+
+window.addEventListener('click', function (e) {
+    if(e.target.classList.value.indexOf('btn') !== -1) {
+        const sound = document.querySelector('.audio-beep');
+        sound.currentTime = 0;
+        sound.play();
+    }
+
+
+});
+
+
+function alarmLight () {
+
+    const displayScreen = document.querySelector('.display-div');
+    const calculatorDisplay = document.querySelector('.calculator-display');
+    displayScreen.classList.toggle('backlight-red');
+    calculatorDisplay.classList.toggle('backlight-red');
+
+}
+
+
+function errorAlarm () {
+    const alarms = document.querySelectorAll('.audio-alarm');
+  
+    const random = Math.floor(Math.random() * 6); //random number from 0 to 5
+  
+    alarms[random].play(); // plays Thief error files
+
+    const bodyElement = document.querySelector('.body');
+
+    const dateDisplay = document.querySelector('.date');
+    dateDisplay.textContent = 'ERROR!';
+
+    alarmLight();
+    
+    on();
+
+    replaceTitle('');
+
+    const title = document.querySelector('h1');
+    const emoji = document.querySelector('.sun-moon');
+    emoji.remove();
+
+    setInterval(() => {
+        title.textContent += 'ERROR! '; 
+        timeDisplay.textContent = 'ERROR!';
+    }, 100);
+
+    setTimeout(() =>{
+        bodyElement.style['background-color'] = 'red';
+    }, 100);
+
+    setTimeout( () => {
+        bodyElement.style['background-color'] = 'black';
+        bodyElement.style['transition'] = '5s';        
+    }, 5000);
+
+    setTimeout(()=>{
+        document.location.reload();
+    },10000);
+
+    
+}
+
+
+function on() {
+    document.getElementById("overlay").style.display = "block";
+  }
+  
+  function off() {
+    document.getElementById("overlay").style.display = "none";
+  }
+
+
+
+  window.addEventListener('keydown', (e) => {
+    console.log(e.keyCode);
+  });

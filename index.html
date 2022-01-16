@@ -19,24 +19,26 @@
     <div class='top-bar'>
         <h1>Paulo's Calculator Watch</h1>
         <span class='sun-moon on'>🌞</span>
-        <span class='sun-moon off'>🌚</span>
     </div>
 
-    
+    <div class='button-watch-assembly'>
 
-    <button class='mode-btn'>Mode</button>
+    <button class='mode-btn'></button>
     
     <div class='watch-div'>
         
         <div class='display-outer-div'>
             
             <div class='top-div'>
-                <span class='casio'>PAULO</span>
+                <span class='casio'><a href="https://www.linkedin.com/in/pgsmagno/">PAULO</a></span>
                 <span class='data-bank'>DATA BANK <span class='number-150'>150</span></span>
                 <span class='illuminator'> ◀ ILLUMINATOR ▶</illuminator></span>
             </div>
-            <div class='display-div'>
-                
+
+            <div class='flex-span-display'>
+                <span class=btn-vertical-text>MODE</span>
+            
+            <div class='display-div'>                
                 
                 <div class='date'></div>
                 
@@ -47,7 +49,8 @@
                 
                 
             </div>
-
+        </div>
+            
             
         </div>
         <div class='middle-div'>
@@ -67,30 +70,45 @@
             <button class="grid-item btn btn-number btn-7">7</button>
             <button class="grid-item btn btn-number btn-8">8</button>
             <button class="grid-item btn btn-number btn-9">9</button>
-            <button class="grid-item btn btn-addition">+</button>
+            <button class="grid-item btn btn-division">÷</button>
 
             <button class="grid-item btn btn-number btn-4">4</button>
             <button class="grid-item btn btn-number btn-5">5</button>
             <button class="grid-item btn btn-number btn-6">6</button>
-            <button class="grid-item btn btn-subtraction">-</button>
+            <button class="grid-item btn btn-multiplication">x</button>
 
             <button class="grid-item btn btn-number btn-1">1</button>
             <button class="grid-item btn btn-number btn-2">2</button>
             <button class="grid-item btn btn-number btn-3">3</button>
-            <button class="grid-item btn btn-multiplication">x</button>            
-            
+                        
+            <button class="grid-item btn btn-subtraction">-</button>
             <button class="grid-item btn btn-dot">.</button>
             <button class="grid-item btn btn-number btn-0">0</button>
             <button class="grid-item btn btn-equals">=</button>
-            <button class="grid-item btn btn-division">÷</button>
+            
+
+            <button class="grid-item btn btn-addition">+</button>
         </div>
     </div>
+</div>
 
 
 
 
 
+<audio class='audio-beep' src="./sounds/beep.mp3"></audio>
 
+<audio class='audio-alarm alarm-1' src="./sounds/error1.mp3"></audio>
+<audio class='audio-alarm alarm-2' src="./sounds/error2.mp3"></audio>
+<audio class='audio-alarm alarm-3' src="./sounds/error3.mp3"></audio>
+<audio class='audio-alarm alarm-4' src="./sounds/error4.mp3"></audio>
+<audio class='audio-alarm alarm-5' src="./sounds/error5.mp3"></audio>
+<audio class='audio-alarm alarm-6' src="./sounds/error6.mp3"></audio>
+
+
+
+
+<div id="overlay"></div>
 
 </body>
 
