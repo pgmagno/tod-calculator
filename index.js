@@ -514,7 +514,6 @@ function errorAlarm () {
     
 }
 
-
 function on() {
     document.getElementById("overlay").style.display = "block";
   }
@@ -526,5 +525,55 @@ function on() {
 
 
   window.addEventListener('keydown', (e) => {
-    console.log(e.keyCode);
+
+    if(e.target.classList.value.indexOf('btn') !== -1) {
+        const sound = document.querySelector('.audio-beep');
+        sound.currentTime = 0;
+        sound.play();
+    }
+
+    if(e.keyCode === 111) {
+        btnDivide.classList.add('btn-active');
+    }
   });
+
+  window.addEventListener('keyup', (e) => {
+    
+
+    if(e.keyCode === 111) {
+        btnDivide.classList.remove('btn-active');
+    }
+  });
+
+
+
+//   switch (e.keyCode) {
+//       case :
+          
+//           break;
+  
+//       default:
+//           break;
+//   }
+
+//   division 111
+//   multiply 106
+//   plus     107
+//   minus    109*
+
+// 9 105
+// 8 104
+// 7 103
+// 6 102 
+// 5 101
+// 4 100
+// 3 99
+// 2 98
+// 1 97
+// 0 96
+// equals 13 
+// dot    194
+// virgu 110
+// btnBackspace 8
+// delete   46
+

@@ -204,7 +204,7 @@ a {
     letter-spacing: 3px;
 }
 
-.btn:active{
+.btn-active{
     background-color: rgb(26, 36, 36);
     color: rgb(155, 155, 155);
     box-shadow: -1px -1px 10px inset black;
