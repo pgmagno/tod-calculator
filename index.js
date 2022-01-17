@@ -52,7 +52,14 @@ function operate(a, b, operation) {
 const displayDiv = document.querySelector('.display-value');
 let currentValue = displayDiv.value;
 
-///////////////// event listeners NUMBERS ///////////
+///////////////// NUMBERS ///////////
+
+const allBtns = document.querySelectorAll('button');
+allBtns.forEach( button => {
+        button.addEventListener('click', playBeep);
+        }
+);
+
 
 const btn1 = document.querySelector('.btn-1');
 const btn2 = document.querySelector('.btn-2');
@@ -64,132 +71,50 @@ const btn7 = document.querySelector('.btn-7');
 const btn8 = document.querySelector('.btn-8');
 const btn9 = document.querySelector('.btn-9');
 const btn0 = document.querySelector('.btn-0');
-const btnSign = document.querySelector('.btn-sign');
 
-btn1.addEventListener('click', () => {
+btn1.addEventListener('click', () => btnNumberPress(1));
+btn2.addEventListener('click', () => btnNumberPress(2));
+btn3.addEventListener('click', () => btnNumberPress(3));
+btn4.addEventListener('click', () => btnNumberPress(4));
+btn5.addEventListener('click', () => btnNumberPress(5));
+btn6.addEventListener('click', () => btnNumberPress(6));
+btn7.addEventListener('click', () => btnNumberPress(7));
+btn8.addEventListener('click', () => btnNumberPress(8));
+btn9.addEventListener('click', () => btnNumberPress(9));
+
+
+function btnNumberPress (number) {
     if(operationActive) {
         clear();
     }
     if (displayDiv.value === '0') {
-        displayDiv.value = 1;
-        return;
-    }
-    displayDiv.value += 1;
-});
-
-btn2.addEventListener('click', () => {
-    if(operationActive) {
-        clear();
-    }
-    if (displayDiv.value === '0') {
-        displayDiv.value = 2;
-        return;
-    }
-    displayDiv.value += 2;
-});
-
-btn3.addEventListener('click', () => {
-    if(operationActive) {
-        clear();
-    }
-    if (displayDiv.value === '0') {
-        displayDiv.value = 3;
-        return;
-    }
-    displayDiv.value += 3;
-});
-
-btn4.addEventListener('click', () => {
-    if(operationActive) {
-        clear();
-    }
-    if (displayDiv.value === '0') {
-        displayDiv.value = 4;
-        return;
-    }
-    displayDiv.value += 4;
-});
-
-btn5.addEventListener('click', () => {
-    if(operationActive) {
-        clear();
-    }
-    if (displayDiv.value === '0') {
-        displayDiv.value = 5;
-        return;
-    }
-    displayDiv.value += 5;
-});
-
-btn6.addEventListener('click', () => {
-    if(operationActive) {
-        clear();
-    }
-    if (displayDiv.value === '0') {
-        displayDiv.value = 6;
-        return;
-    }
-    displayDiv.value += 6;
-});
-
-btn7.addEventListener('click', () => {
-    if(operationActive) {
-        clear();
-    }    
-    if (displayDiv.value === '0') {
-        displayDiv.value = 7;
-        return;
-    }
-    displayDiv.value += 7;
-});
-
-btn8.addEventListener('click', () => {
-    if(operationActive) {
-        clear();
-    }
-    if (displayDiv.value === '0') {
-        displayDiv.value = 8;
-        return;
-    }
-
-   displayDiv.value += 8;
-});
-
-btn9.addEventListener('click', () => {
-    if(operationActive) {
-        clear();
-    }
-    if (displayDiv.value === '0') {
-        displayDiv.value = 9;
+        displayDiv.value = number;
         return;
     }  
-    displayDiv.value += 9;
-});
+    displayDiv.value += number;
+    
+}
 
 btn0.addEventListener('click', () => {    
     if(operationActive) {
         clear();
     }
-
-
+    
     if (displayDiv.value !== '0' || displayDiv.value === '0.') {
         displayDiv.value += 0;
-    }
-    
+    }   
 });
 
-btnSign.addEventListener('click', () => {
+////////////////////// change Sign ///////////////////////
+
+function switchSign () {
     displayDiv.value *= -1;
-});
+}
 
+const btnSign = document.querySelector('.btn-sign');
+btnSign.addEventListener('click', switchSign);
 
 /////////////////// clear display //////////
-
-const btnClear = document.querySelector('.btn-clear-all');
-btnClear.addEventListener('click', clearAll);
-
-const btnClearEntry = document.querySelector('.btn-clear-entry');
-btnClearEntry.addEventListener('click', clear);
 
 function clear() {
     displayDiv.value = 0;
@@ -199,24 +124,34 @@ function clear() {
 function clearAll() {
     displayDiv.value = 0;
     operationActive = false;
-    result[0] = 0;
-    secondOperand = 0;
+    resultOfLastOperation[0] = 0;
+    secondOperand = false;
 };
 
+function backspace() {
+    displayDiv.value = parseInt(displayDiv.value / 10);    
+}
+
+const btnClear = document.querySelector('.btn-clear-all');
+const btnClearEntry = document.querySelector('.btn-clear-entry');
 const btnBackspace = document.querySelector('.btn-backspace');
-btnBackspace.addEventListener('click', () => {
-    displayDiv.value = parseInt(displayDiv.value / 10);
-});
 
-//////////// FLOAT PARSER //////////////////////
+btnClear.addEventListener('click', clearAll);
+btnClearEntry.addEventListener('click', clear);
+btnBackspace.addEventListener('click', backspace);
 
-const btnDot = document.querySelector('.btn-dot');
-btnDot.addEventListener('click', () => {
+
+//////////// INSERT A DOT (OPERATE WITH FLOATS) //////////////////////
+
+function insertDot () {
     
     if(displayDiv.value.indexOf(".") === -1) {
         displayDiv.value += '.';
     }
-});
+}
+
+const btnDot = document.querySelector('.btn-dot');
+btnDot.addEventListener('click', insertDot);
 
 ////////////// Event Listeners Operations ////////////
 
@@ -226,88 +161,49 @@ const btnMult = document.querySelector('.btn-multiplication');
 const btnDivide = document.querySelector('.btn-division');
 const btnEquals = document.querySelector('.btn-equals');
 
-let secondOperand = 0;
+let secondOperand = false;
 let operationActive = false;
-const result = [];
+const resultOfLastOperation = [];
 let operator = 'none';
 
+////////////////////// RESULT ///////////////////////
 
+btnEquals.addEventListener('click', pressEquals); 
 
-btnEquals.addEventListener('click', () => {
+function pressEquals () {
 
     if(operator === 'none') {
         return;
     } else {
-        result[0] = operate(result[0], displayDiv.value, operator);    
+        resultOfLastOperation[0] = operate(resultOfLastOperation[0], displayDiv.value, operator);    
         clear();
-        displayDiv.value = result[0];
+        displayDiv.value = resultOfLastOperation[0];
         operationActive = true;
         operator = 'none';
-        secondOperand = 0;
-    }    
-});
-
-////////// operations ////////////
-
-btnAdd.addEventListener('click', () => {
-
-    if (secondOperand == 0) {
-        result[0] = displayDiv.value;
-        secondOperand = 1;
-        operator = 'addition';
-    } else {
-        result[0] = operate(result[0], displayDiv.value, operator);
-        displayDiv.value = result[0];
-        operator = 'addition';       
+        secondOperand = false;
     }
+}
 
-    operationActive = true;
-});
+////////// OPERATIONS ////////////
 
-btnSub.addEventListener('click', () => {
+btnAdd.addEventListener('click', () => pressOperator('addition'));
+btnSub.addEventListener('click', () => pressOperator('subtraction'));
+btnMult.addEventListener('click', () => pressOperator('multiplication'));
+btnDivide.addEventListener('click', () => pressOperator('division'));
 
-    if (secondOperand == 0) {
-        result[0] = displayDiv.value;
-        secondOperand = 1;
-        operator = 'subtraction';
+ function pressOperator (operationName) {
+
+    if (!secondOperand) {
+        resultOfLastOperation[0] = displayDiv.value;        
+        secondOperand = true;
+        operator = operationName;    
     } else {
-        result[0] = operate(result[0], displayDiv.value, operator);
-        displayDiv.value = result[0]; 
-        operator = 'subtraction';
-    }
-
-    operationActive = true;
-});
-
-btnMult.addEventListener('click', () => {
-
-    if (secondOperand == 0) {
-        result[0] = displayDiv.value;        
-        secondOperand = 1;
-        operator = 'multiplication';
-    } else {
-        result[0] = operate(result[0], displayDiv.value, operator);
-        displayDiv.value = result[0];
-        operator = 'multiplication';
-    }
-
-    operationActive = true;
-});
-
-btnDivide.addEventListener('click', () => {
-
-    if (secondOperand == 0) {
-        result[0] = displayDiv.value;        
-        secondOperand = 1;
-        operator = 'division';    
-    } else {
-        result[0] = operate(result[0], displayDiv.value, operator);
-        displayDiv.value = result[0];        
-        operator = 'division';
+        resultOfLastOperation[0] = operate(resultOfLastOperation[0], displayDiv.value, operator);
+        displayDiv.value = resultOfLastOperation[0];        
+        operator = operationName;
     }
     operationActive = true;
-});
-
+}
 
 ///////////////////   CLOCK      ///////////////////////
 
@@ -343,6 +239,10 @@ function showCurrentTime () {
 
 showCurrentTime();
 
+/////////////////////////////////////////////////////////
+///////////////////// DATE //////////////////////////////
+/////////////////////////////////////////////////////////
+
 function showDate () {
 
     const date = new Date();
@@ -373,11 +273,9 @@ const modeBtn = document.querySelector('.mode-btn');
 const timeDisplayOnOff = document.querySelector('.time');
 const calculatorDisplayOnOff = document.querySelector('.calculator-display');
 
-
 modeBtn.addEventListener('click', () => {
     // toggles would be dependent on CSS order of statements, best to 
     // do it manually
-
     clearAll();
     timeDisplayOnOff.classList.toggle('off');
     timeDisplayOnOff.classList.toggle('on');
@@ -417,6 +315,8 @@ function toggleDarkModeIcon () {
 
 }
 
+
+
 function turnOff () {
     
     replaceTitle("It\'s hard to see. Press the light button");
@@ -450,16 +350,17 @@ function pressLightBtn () {
 
 
 
-window.addEventListener('click', function (e) {
-    if(e.target.classList.value.indexOf('btn') !== -1) {
-        const sound = document.querySelector('.audio-beep');
-        sound.currentTime = 0;
-        sound.play();
-    }
 
+function playBeep() {
+    const sound = document.querySelector('.audio-beep');
+    sound.currentTime = 0;
+    sound.play();
+}
 
-});
+    
 
+/////////////////////////// ERROR DISPLAY ////////////////////////
+/////////////////////////////////////////////////////////////////
 
 function alarmLight () {
 
@@ -469,7 +370,6 @@ function alarmLight () {
     calculatorDisplay.classList.toggle('backlight-red');
 
 }
-
 
 function errorAlarm () {
     const alarms = document.querySelectorAll('.audio-alarm');
@@ -485,7 +385,7 @@ function errorAlarm () {
 
     alarmLight();
     
-    on();
+    // on();
 
     replaceTitle('');
 
@@ -510,70 +410,107 @@ function errorAlarm () {
     setTimeout(()=>{
         document.location.reload();
     },10000);
-
     
 }
 
-function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
 
+window.addEventListener('keydown', (e) => {
 
+    //btnNumberPress(1)
 
-  window.addEventListener('keydown', (e) => {
+    const keyToPress = document.querySelector(`button[data-key="${e.keyCode}"]`);
+    console.log(keyToPress.innerHTML);
 
-    if(e.target.classList.value.indexOf('btn') !== -1) {
-        const sound = document.querySelector('.audio-beep');
-        sound.currentTime = 0;
-        sound.play();
+    if(keyToPress == null) return;
+    
+    keyToPress.classList.add('btn-active');
+
+    if(keyToPress.classList.contains('btn-top')) {
+        keyToPress.classList.add('btn-top-active');
     }
 
-    if(e.keyCode === 111) {
-        btnDivide.classList.add('btn-active');
+    playBeep();
+
+
+    const symbols = [
+        ['1' , () => btnNumberPress(1)],
+        ['2' , () => btnNumberPress(2)],
+        ['3' , () => btnNumberPress(3)],
+        ['4' , () => btnNumberPress(4)],    
+    ]
+
+    for(let i = 0; i < symbols.length; i++) {
+        if(symbols[i][0] === keyToPress.innerHTML) {
+            symbols[1]();        
+        }
+
     }
+
   });
 
   window.addEventListener('keyup', (e) => {
     
-
-    if(e.keyCode === 111) {
-        btnDivide.classList.remove('btn-active');
-    }
+    const keyToPress = document.querySelector(`button[data-key="${e.keyCode}"]`);
+    if(keyToPress == null) return;
+    keyToPress.classList.remove('btn-active');
+    keyToPress.classList.remove('btn-top-active');
   });
 
 
+    // :'5':'6':'7':'8':'9': '0': '=': '.':'+':'-':'÷':'X':'C':'CE':'⬅': '+/-']
 
-//   switch (e.keyCode) {
-//       case :
-          
-//           break;
+
+
   
-//       default:
-//           break;
-//   }
+//   switch (keyToPress.innerHTML) {
+//     case '1':
 
-//   division 111
-//   multiply 106
-//   plus     107
-//   minus    109*
+//     break;
 
-// 9 105
-// 8 104
-// 7 103
-// 6 102 
-// 5 101
-// 4 100
-// 3 99
-// 2 98
-// 1 97
-// 0 96
-// equals 13 
-// dot    194
-// virgu 110
-// btnBackspace 8
-// delete   46
+//     case '2':
 
+//     break;
+
+//     case '3':
+
+//     break;
+
+//     case '4':
+
+//     break;
+
+//     case '1':
+
+//     break;
+
+//     case '1':
+
+//     break;
+
+//     case '1':
+
+//     break;
+
+//     case '1':
+
+//     break;
+
+//     case '1':
+
+//     break;
+
+//     case '1':
+
+//     break;
+
+//     case '1':
+
+//     break;
+
+//     case '1':
+
+//     break;
+                                                
+//     default:
+//         break;
+// }
