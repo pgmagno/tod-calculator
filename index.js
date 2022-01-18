@@ -95,7 +95,9 @@ function btnNumberPress (number) {
     
 }
 
-btn0.addEventListener('click', () => {    
+btn0.addEventListener('click', btnNumberZero); 
+
+function btnNumberZero () {    
     if(operationActive) {
         clear();
     }
@@ -103,7 +105,7 @@ btn0.addEventListener('click', () => {
     if (displayDiv.value !== '0' || displayDiv.value === '0.') {
         displayDiv.value += 0;
     }   
-});
+}
 
 ////////////////////// change Sign ///////////////////////
 
@@ -126,6 +128,7 @@ function clearAll() {
     operationActive = false;
     resultOfLastOperation[0] = 0;
     secondOperand = false;
+    operator = 'none';
 };
 
 function backspace() {
@@ -272,35 +275,71 @@ showDate();
 const modeBtn = document.querySelector('.mode-btn');
 const timeDisplayOnOff = document.querySelector('.time');
 const calculatorDisplayOnOff = document.querySelector('.calculator-display');
+let appMode = 'Watch';
 
-modeBtn.addEventListener('click', () => {
+modeBtn.addEventListener('click', modeSwitch);
+
+function modeSwitch () {
     // toggles would be dependent on CSS order of statements, best to 
     // do it manually
+
+    if (appMode === 'Calculator') {
+        appMode = 'Watch';
+    } else {
+        appMode = 'Calculator';
+    }
+
     clearAll();
     timeDisplayOnOff.classList.toggle('off');
     timeDisplayOnOff.classList.toggle('on');
 
     calculatorDisplayOnOff.classList.toggle('off');   
     calculatorDisplayOnOff.classList.toggle('on');
-});
+}
+
+let lightsOutStatus = false;
 
 function lightsOut () {
+
+    if (lightsOutStatus === false) {
+        lightsOutStatus = true;
+    } else {
+        lightsOutStatus = false;
+    }
+
+
     const bodyElement = document.querySelector('.body');
-    const displayScreen = document.querySelector('.display-div');
-    const watchBackShadow = document.querySelector('.watch-div');
+    
+    const allElementsDark = document.querySelectorAll('.lights-out');
+    allElementsDark.forEach( element => {
+        element.classList.toggle('lights-out-on');
+    });
 
     bodyElement.classList.toggle('lights-off');
+
+    const tri1 = document.querySelector('.tri-1');
+    const tri2 = document.querySelector('.tri-2');
+
+    tri1.classList.toggle('tri1-lights-out-on');
+    tri2.classList.toggle('tri2-lights-out-on');
+
+    const displayScreen = document.querySelector('.display-div');
     displayScreen.classList.toggle('dark-screen');
-    watchBackShadow.classList.toggle('no-shadow');
+
+    const displayOuterDiv = document.querySelector('.display-outer-div');
+    displayOuterDiv.classList.toggle('display-outer-div-lightsout')
+    const keyboard = document.querySelector('.keyboard');
+    keyboard.classList.toggle('keyboard-lightsout');
+    modeBtn.classList.toggle('mode-btn-lightsout');
 }
 
 function replaceTitle (msg) {
 
     const title = document.querySelector('h1');
-    if(title.textContent === 'Paulo\'s Calculator Watch') {
+    if(title.textContent === 'Calculator Watch') {
         title.textContent = msg;
     } else {
-        title.textContent = "Paulo's Calculator Watch";
+        title.textContent = "Calculator Watch";
     }
 }
 
@@ -319,7 +358,7 @@ function toggleDarkModeIcon () {
 
 function turnOff () {
     
-    replaceTitle("It\'s hard to see. Press the light button");
+    replaceTitle("Press the light button");
     toggleDarkModeIcon();
     lightsOut();
 }
@@ -348,16 +387,11 @@ function pressLightBtn () {
     lightBtn.classList.toggle('light-pressed');
 }
 
-
-
-
 function playBeep() {
     const sound = document.querySelector('.audio-beep');
     sound.currentTime = 0;
     sound.play();
 }
-
-    
 
 /////////////////////////// ERROR DISPLAY ////////////////////////
 /////////////////////////////////////////////////////////////////
@@ -372,6 +406,14 @@ function alarmLight () {
 }
 
 function errorAlarm () {
+
+    if(lightsOutStatus === true) {
+        lightsOut();
+    }
+    if(appMode === 'Calculator') {
+        modeSwitch();
+    }
+
     const alarms = document.querySelectorAll('.audio-alarm');
   
     const random = Math.floor(Math.random() * 6); //random number from 0 to 5
@@ -416,10 +458,8 @@ function errorAlarm () {
 
 window.addEventListener('keydown', (e) => {
 
-    //btnNumberPress(1)
-
     const keyToPress = document.querySelector(`button[data-key="${e.keyCode}"]`);
-    console.log(keyToPress.innerHTML);
+    console.log(e.keyCode);
 
     if(keyToPress == null) return;
     
@@ -431,20 +471,7 @@ window.addEventListener('keydown', (e) => {
 
     playBeep();
 
-
-    const symbols = [
-        ['1' , () => btnNumberPress(1)],
-        ['2' , () => btnNumberPress(2)],
-        ['3' , () => btnNumberPress(3)],
-        ['4' , () => btnNumberPress(4)],    
-    ]
-
-    for(let i = 0; i < symbols.length; i++) {
-        if(symbols[i][0] === keyToPress.innerHTML) {
-            symbols[1]();        
-        }
-
-    }
+    selectFunctionForKeyPress(e.keyCode);
 
   });
 
@@ -455,62 +482,73 @@ window.addEventListener('keydown', (e) => {
     keyToPress.classList.remove('btn-active');
     keyToPress.classList.remove('btn-top-active');
   });
-
-
-    // :'5':'6':'7':'8':'9': '0': '=': '.':'+':'-':'÷':'X':'C':'CE':'⬅': '+/-']
-
-
-
   
-//   switch (keyToPress.innerHTML) {
-//     case '1':
 
-//     break;
 
-//     case '2':
+function selectFunctionForKeyPress(key) {
 
-//     break;
-
-//     case '3':
-
-//     break;
-
-//     case '4':
-
-//     break;
-
-//     case '1':
-
-//     break;
-
-//     case '1':
-
-//     break;
-
-//     case '1':
-
-//     break;
-
-//     case '1':
-
-//     break;
-
-//     case '1':
-
-//     break;
-
-//     case '1':
-
-//     break;
-
-//     case '1':
-
-//     break;
-
-//     case '1':
-
-//     break;
-                                                
-//     default:
-//         break;
-// }
+  switch (key) {
+ case 27:
+    clearAll();
+    break;
+ case 46: 
+    clear();
+    break;
+ case 8:
+    backspace();
+    break;
+ case 9:
+    switchSign();
+    break;
+ case 103:
+ btnNumberPress(7);
+    break;
+ case 104:
+    btnNumberPress(8); 
+    break;
+ case 105:
+    btnNumberPress(9);
+    break;
+ case 111:
+    pressOperator('division');
+    break;
+ case 100:
+    btnNumberPress(4);
+    break;
+ case 101:
+    btnNumberPress(5);
+    break;
+ case 102:
+    btnNumberPress(6);
+    break;
+ case 106:
+    pressOperator('multiplication');
+    break;
+ case 97:
+    btnNumberPress(1);
+    break;
+ case 98:
+    btnNumberPress(2);
+    break;
+ case 99:
+    btnNumberPress(3);
+    break;
+ case 109:
+    pressOperator('subtraction');
+    break;
+ case 194:
+     insertDot(); 
+    break;
+ case 96:
+    btnNumberZero();
+    break;
+ case 13:
+    pressEquals();
+ case 107:
+    pressOperator('addition');
+    break;
+    default:
+        console.log("problem choosing function");
+    break;
+  }
+}

@@ -39,7 +39,7 @@ body {
     box-shadow: 10px 10px 25px 1px rgb(90, 90,90);
     transition: background-color 1s, box-shadow 1s;
 }
-.no-shadow{
+.watch-div-lightsout{
     box-shadow: none;
     background-color: black;
 }
@@ -57,18 +57,22 @@ a {
     color: white;
     font-size: 15px;
     padding: 0;    
+    transition: color 1s;
 }
 
 .casio {
+    color: white;
     font-family: "Orbitron";
     font-size: 25px;
     cursor: pointer;
+    transition: color 1s;
 }
 .data-bank {
     color: gold;
     font-size: 20px;
     font-style: italic;
     text-align: end;
+    transition: color 1s;
 }
 .number-150 {
     font-weight: bolder;
@@ -112,7 +116,12 @@ a {
     height: 250px;
     border-radius: 35px 35px 10px 10px;
     border: 2px outset grey;
+    transition: border 1s;
 }
+.display-outer-div-lightsout {
+    border-color: turquoise;
+}
+
 .middle-div {
     width: 90%;
     margin-top: 10px;
@@ -131,12 +140,12 @@ a {
     background-color: rgb(0, 46, 71);
     border-radius: 5px 0px 0px 5px;
 }
-.tri-1 {
-   
+.tri-1 {   
     height: 0;
     width: 0;
     border-top: 30px solid rgb(0, 46, 71);
     border-right: 30px solid transparent;
+    transition: 1s;
 }
 .tri-2 {
       
@@ -145,6 +154,7 @@ a {
     border-left: 35px solid transparent;
     box-shadow: 2px 2px black;
     cursor: pointer;
+    transition: border-bottom 1s;
 }
 .tri-2-pressed {
     box-shadow: none;
@@ -187,7 +197,9 @@ a {
     grid-gap: 10px;
     border: inset 2px rgb(100, 100,100);
     border-radius: 10px;
-
+}
+.keyboard-lightsout {
+    border-color: turquoise;
 }
 
 .btn {
@@ -230,6 +242,7 @@ a {
     color: white;
 }
 .dark-screen {
+    border-color: black;
     background-color: rgb(10, 10, 10);
 }
 
@@ -254,8 +267,9 @@ h1 {
 
 .backlight {
     z-index: 3;
-    background-color: darkturquoise;
+    background-color: #00ced1;
     box-shadow: 1px 1px 400px 100px darkturquoise ;
+    border-color: turquoise;
 }
 .backlight-red {
     z-index: 3;
@@ -340,16 +354,28 @@ h1 {
     border-right: none;
     position: relative;
     bottom: 127px;
+    transition: border 1s;
+}
+.mode-btn-lightsout {
+    border-color: turquoise;
 }
  
 .btn-vertical-text {
     position: relative;
     right: 10px;
     color: white;
+    font-weight: bold;
     font-size: 15px;
     writing-mode: vertical-lr;
     text-orientation: mixed;
+    transition: 1s;
 }
+
+
+.btn-vertical-text-lightsout {
+    color: turquoise;
+}
+
 .flex-span-display {
     padding: 0;
     display: flex;
@@ -357,3 +383,16 @@ h1 {
     align-items: center;
 }
 
+.lights-out-on {
+    background-color: black;
+    color: turquoise;
+    box-shadow: none;
+    transition: 1s;
+}
+.tri1-lights-out-on {
+    border-top: 30px solid black;
+}
+
+.tri2-lights-out-on {
+    border-bottom: 35px solid black;
+}
