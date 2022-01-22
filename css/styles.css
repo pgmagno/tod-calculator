@@ -8,7 +8,7 @@ h1 {
     font-family: 'Digital Numbers Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('Digital Numbers Regular'), url('/css/DigitalNumbers-Regular.woff') format('woff');
+    src: local('Digital Numbers Regular'), url('./css/DigitalNumbers-Regular.woff') format('woff');
     }
 
 .time {
