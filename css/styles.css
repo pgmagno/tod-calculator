@@ -17,14 +17,16 @@ h1 {
 }
 
 body {
+    font-size: 400px;
+    margin: auto;
+    width: 100%;
+    height: 100% vh;
     font-size: 40px;
     font-family: 'Rationale', sans-serif;
     transition: background-color 1s, color 1s;
 }
 
-.sun-moon {
-    transition: 5s;
-}
+
 
 .watch-div {
     margin: 50px 0;
@@ -32,7 +34,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
+    width: 10em;
     background-color: rgb(90, 90,90);
     height: 650px;
     border-radius: 40px;
@@ -97,7 +99,7 @@ a {
     border-radius: 12px;
     border: slategray inset 10px;
     height: 100px;
-    width: 230px;
+    width: 15rem;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -112,8 +114,8 @@ a {
     justify-content: center;
     align-items: center;
     background-color: black;
-    width: 360px;
-    height: 250px;
+    width: 9em;
+    height: 7em;
     border-radius: 35px 35px 10px 10px;
     border: 2px outset grey;
     transition: border 1s;
@@ -203,8 +205,8 @@ a {
 }
 
 .btn {
-    width: 75px;
-    height: 40px;
+    width: 3.5em;
+    height: 2em;
     background-color: gray;
     color: white;
     border-radius: 5px;
@@ -247,6 +249,9 @@ a {
 }
 
 .top-bar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -254,7 +259,8 @@ a {
 
 h1 {
     margin: 0;
-    font-size: 45px;
+    padding: 0;
+    font-size: 1em;
 }
 
 .day {
@@ -273,7 +279,7 @@ h1 {
 }
 .backlight-red {
     z-index: 3;
-    animation: red-alarm 0.5s ease-in-out 13 forwards;
+    animation: red-alarm 0.5s ease-in-out 17 forwards;
 }
 
 @keyframes red-alarm {
@@ -281,16 +287,19 @@ h1 {
         background-color: black;
         color: red;
         box-shadow: 1px 1px 400px 100px none;
+        border-color: rgb(27, 27, 27);
     }
     50% {
         background-color: red;
         color: black;
-            box-shadow: 1px 1px 400px 100px red ;
+        box-shadow: 1px 1px 400px 100px red ;
+        border-color: rgb(255, 34, 34);
     }
     100% {
         background-color: black;
         color: black;
-        box-shadow: 1px 1px 400px 100px none;            
+        box-shadow: 1px 1px 400px 100px none;   
+        border-color: black;         
     }
 
 }
@@ -336,10 +345,14 @@ h1 {
 
 
 .button-watch-assembly {
-    top: 10%;
-    left: 25%;
+    margin: auto;
+    height: 100vh;
     position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
+    flex-shrink: 3;
     justify-content: center;
     align-items: center;
 }

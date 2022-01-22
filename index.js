@@ -6,27 +6,37 @@ function add(a, b) {
     a = Number(a);
     b = Number(b)
         
-    let result = a + b;
+    let result = parseFloat((a + b).toPrecision(12));
 
-    return String(result);
+    return result;
 }
 
 function subtract(a, b) {
-    return a - b;
+    a = Number(a);
+    b = Number(b);
+
+    return parseFloat((a - b).toPrecision(12));
 }
 
 function multiply(a, b) {
-    return a * b;
+    a = Number(a);
+    b = Number(b);
+    
+    return parseFloat((a * b).toPrecision(12));
+
 }
 
 function divide(a, b) {
+
+    a = Number(a);
+    b = Number(b);
 
     if (b == 0) {
         errorAlarm();
         return 'Error!';
     }
 
-    return a / b;
+    return parseFloat((a / b).toPrecision(12));
 }
 
 function operate(a, b, operation) {
@@ -86,8 +96,9 @@ btn9.addEventListener('click', () => btnNumberPress(9));
 function btnNumberPress (number) {
     if(operationActive) {
         clear();
+        currentOperand = true;
     }
-    if (displayDiv.value === '0') {
+    if (displayDiv.value == '0') {
         displayDiv.value = number;
         return;
     }  
@@ -100,6 +111,7 @@ btn0.addEventListener('click', btnNumberZero);
 function btnNumberZero () {    
     if(operationActive) {
         clear();
+        currentOperand = true;
     }
     
     if (displayDiv.value !== '0' || displayDiv.value === '0.') {
@@ -119,16 +131,17 @@ btnSign.addEventListener('click', switchSign);
 /////////////////// clear display //////////
 
 function clear() {
-    displayDiv.value = 0;
+    updateDisplay(0);
     operationActive = false;
 };
 
 function clearAll() {
-    displayDiv.value = 0;
+    currentOperand = false;
     operationActive = false;
-    resultOfLastOperation[0] = 0;
-    secondOperand = false;
+    lastOperand = '';
     operator = 'none';
+    lastValidOperation = '';
+    updateDisplay(0);
 };
 
 function backspace() {
@@ -164,48 +177,60 @@ const btnMult = document.querySelector('.btn-multiplication');
 const btnDivide = document.querySelector('.btn-division');
 const btnEquals = document.querySelector('.btn-equals');
 
-let secondOperand = false;
+let currentOperand = false;
 let operationActive = false;
-const resultOfLastOperation = [];
+let lastOperand = '';
 let operator = 'none';
+let lastValidOperation = '';
 
-////////////////////// RESULT ///////////////////////
 
-btnEquals.addEventListener('click', pressEquals); 
-
-function pressEquals () {
-
-    if(operator === 'none') {
-        return;
-    } else {
-        resultOfLastOperation[0] = operate(resultOfLastOperation[0], displayDiv.value, operator);    
-        clear();
-        displayDiv.value = resultOfLastOperation[0];
-        operationActive = true;
-        operator = 'none';
-        secondOperand = false;
-    }
-}
-
-////////// OPERATIONS ////////////
-
+btnEquals.addEventListener('click', equals); 
 btnAdd.addEventListener('click', () => pressOperator('addition'));
 btnSub.addEventListener('click', () => pressOperator('subtraction'));
 btnMult.addEventListener('click', () => pressOperator('multiplication'));
 btnDivide.addEventListener('click', () => pressOperator('division'));
 
- function pressOperator (operationName) {
 
-    if (!secondOperand) {
-        resultOfLastOperation[0] = displayDiv.value;        
-        secondOperand = true;
-        operator = operationName;    
-    } else {
-        resultOfLastOperation[0] = operate(resultOfLastOperation[0], displayDiv.value, operator);
-        displayDiv.value = resultOfLastOperation[0];        
-        operator = operationName;
-    }
+
+////////// equals ///////////////
+
+function equals() {
+
+    // console.log("lastOperand:" + lastOperand);
+    // console.log("currentOperand:" + currentOperand);
+    // console.log("lastOperand:" + lastOperand);
+        if(currentOperand === false) {
+            return;
+        } else {
+            currentOperand = displayDiv.value;
+            lastOperand = operate(lastOperand, currentOperand, lastValidOperation);
+            updateDisplay(lastOperand);
+            currentOperand = false;
+        }
+}
+
+////////// OPERATIONS ////////////
+
+ function pressOperator (operationName) {
+    
     operationActive = true;
+    
+    if (!currentOperand) {
+        lastOperand = displayDiv.value;
+        lastValidOperation = operationName;
+        return;
+    } else {
+        console.log(lastValidOperation);
+        currentOperand = displayDiv.value;
+        lastOperand = operate(lastOperand, currentOperand, lastValidOperation);
+        updateDisplay(lastOperand);
+        lastValidOperation = operationName;
+    }
+    
+}
+
+function updateDisplay (value) {
+    displayDiv.value = value;
 }
 
 ///////////////////   CLOCK      ///////////////////////
@@ -424,6 +449,7 @@ function errorAlarm () {
 
     const dateDisplay = document.querySelector('.date');
     dateDisplay.textContent = 'ERROR!';
+    const watchDiv = document.querySelector('.watch-div');
 
     alarmLight();
     
@@ -435,7 +461,7 @@ function errorAlarm () {
     const emoji = document.querySelector('.sun-moon');
     emoji.remove();
 
-    setInterval(() => {
+    const error = setInterval(() => {
         title.textContent += 'ERROR! '; 
         timeDisplay.textContent = 'ERROR!';
     }, 100);
@@ -444,22 +470,26 @@ function errorAlarm () {
         bodyElement.style['background-color'] = 'red';
     }, 100);
 
-    setTimeout( () => {
+    setTimeout( () => { 
+        lightsOut();
         bodyElement.style['background-color'] = 'black';
-        bodyElement.style['transition'] = '5s';        
+        bodyElement.style['color'] = 'black';
+        watchDiv.style['box-shadow'] = 'none';
+        watchDiv.style['transition'] = '5s';       
+        watchDiv.style['color'] = 'black';
+        watchDiv.style['background-color'] = 'black';  
+        bodyElement.style['transition'] = '5s';      
     }, 5000);
 
     setTimeout(()=>{
         document.location.reload();
     },10000);
-    
 }
 
 
 window.addEventListener('keydown', (e) => {
 
     const keyToPress = document.querySelector(`button[data-key="${e.keyCode}"]`);
-    console.log(e.keyCode);
 
     if(keyToPress == null) return;
     
@@ -543,7 +573,7 @@ function selectFunctionForKeyPress(key) {
     btnNumberZero();
     break;
  case 13:
-    pressEquals();
+    equals();
  case 107:
     pressOperator('addition');
     break;
