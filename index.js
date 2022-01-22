@@ -379,8 +379,6 @@ function toggleDarkModeIcon () {
 
 }
 
-
-
 function turnOff () {
     
     replaceTitle("Press the light button");
