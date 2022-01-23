@@ -109,8 +109,7 @@ a {
     justify-content: space-between;
     flex-direction: column;
 
-    transition: box-shadow 0.5s cubic-bezier(0.25, 0.94, 0, 0.97),
-    background-color 1s cubic-bezier(0.25, 0.94, 0, 0.97);
+    transition: 1s cubic-bezier(0.25, 0.94, 0, 0.97);
 }
 .display-outer-div {
     padding: 10px 0 0;
