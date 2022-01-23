@@ -145,7 +145,7 @@ function clearAll() {
 };
 
 function backspace() {
-    displayDiv.value = parseInt(displayDiv.value / 10);    
+    displayDiv.value = displayDiv.value.slice(0, -1);    
 }
 
 const btnClear = document.querySelector('.btn-clear-all');
