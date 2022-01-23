@@ -162,7 +162,7 @@ a {
 
 .light {
     padding: 0 7px 0 0;
-    font-size: 23px;
+    font-size: 2.3rem;
     height: 35px;
     font-family: Arial, sans-serif;
     letter-spacing: 2px;
@@ -175,7 +175,10 @@ a {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    text-shadow: 1px 1px 1px rgb(10, 10, 10), -1px -1px 1px rgb(200,200,200);
+    text-shadow:  0 0 1px rgb(65, 65, 65),
+     0 0 1px rgb(63, 63, 63),
+     0 0 1px black,
+     0 0 1px black; 
 }
 .light-pressed {
     box-shadow: none;
@@ -251,7 +254,7 @@ a {
 }
 
 .top-bar {
-    margin: 0 auto;
+    margin: 5px auto 0;
     z-index: -1;
     font-size: clamp(1rem, 2rem, 1.5rem);
     position: fixed;
@@ -259,13 +262,15 @@ a {
     right: 0;
     left: 0;
     padding: 0;
-    width: clamp(300px, 200px, 100vw);
+    width: clamp(30rem, 35rem, 45rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    word-wrap: break-word;
 }
 
 h1 {
+    word-wrap: break-word;
     padding: 0;
     margin: 0;
     display: inline;
@@ -339,7 +344,6 @@ h1 {
 .sun-moon {
     margin-left: auto;
     font-size: 4rem;
-    cursor: pointer;
 }
 
 
@@ -361,10 +365,6 @@ h1 {
 .button-watch-assembly {
     margin: 40px auto;
     height: 94vh;
-    /* position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); */
     display: flex;
     flex-shrink: 3;
     justify-content: center;
@@ -422,4 +422,44 @@ h1 {
 
 .tri2-lights-out-on {
     border-bottom: 35px solid black;
+}
+
+.darkmode-toggle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 3rem;
+    font-size: 1rem;
+    padding: 0 3px  ;
+    margin: 0;
+    width: 5rem;
+    border: 2px solid lightsteelblue;
+    border-radius: 50px;
+    background: linear-gradient(311deg, rgba(103,223,255,1) 30%, rgba(253,187,45,1) 100%);  
+    transition: 0.1s;
+    cursor: pointer;
+}
+.sun-moon {
+    padding: 0;
+    margin: 0;
+    height: 3rem;
+    width: 2rem;
+    border-radius: 50%;
+    font-size: 2rem;
+    animation: toggleOff 0.7s cubic-bezier(0, 1.32, 0.29, 1.26) forwards;
+}
+.animated {
+    animation: toggle 0.7s cubic-bezier(0, 1.32, 0.29, 1.26) forwards;
+}
+
+@keyframes toggle {
+    100%{
+        transform: translateX(100%);
+    }
+}
+
+@keyframes toggleOff {
+    0% {
+        transform: translateX(100%);
+    }
 }

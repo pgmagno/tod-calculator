@@ -62,6 +62,19 @@ function operate(a, b, operation) {
 const displayDiv = document.querySelector('.display-value');
 let currentValue = displayDiv.value;
 
+///////////////// calculatorMode /////////////////
+
+let calculatorMode = false
+
+function switchCalculatorOn () {
+    if(calculatorMode === false) {
+        calculatorMode = true;
+    } else {
+        calculatorMode = false;
+    }
+}
+
+
 ///////////////// NUMBERS ///////////
 
 const allBtns = document.querySelectorAll('button');
@@ -94,6 +107,11 @@ btn9.addEventListener('click', () => btnNumberPress(9));
 
 
 function btnNumberPress (number) {
+
+    if(calculatorMode) {
+
+    
+
     if(operationActive) {
         clear();
         currentOperand = true;
@@ -103,12 +121,19 @@ function btnNumberPress (number) {
         return;
     }  
     displayDiv.value += number;
+
+    }
     
 }
 
 btn0.addEventListener('click', btnNumberZero); 
 
-function btnNumberZero () {    
+function btnNumberZero () {
+    
+    if (calculatorMode) {
+
+    
+
     if(operationActive) {
         clear();
         currentOperand = true;
@@ -117,6 +142,8 @@ function btnNumberZero () {
     if (displayDiv.value !== '0' || displayDiv.value === '0.') {
         displayDiv.value += 0;
     }   
+
+    }
 }
 
 ////////////////////// change Sign ///////////////////////
@@ -308,6 +335,10 @@ function modeSwitch () {
     // toggles would be dependent on CSS order of statements, best to 
     // do it manually
 
+    switchCalculatorOn();
+
+    playBeep();
+
     if (appMode === 'Calculator') {
         appMode = 'Watch';
     } else {
@@ -371,12 +402,18 @@ function replaceTitle (msg) {
 function toggleDarkModeIcon () {
 
     const sunMoon = document.querySelector('.sun-moon');
+    const darkModeRail = document.querySelector('.darkmode-toggle');
+    sunMoon.classList.toggle('animated');
     if (sunMoon.textContent === '🌞') {
-        sunMoon.textContent = '🌚';
+        darkModeRail.style['background'] = 'linear-gradient(315deg, rgba(105,150,255,1) 0%, rgba(13,46,64,1) 100%)';
+        sunMoon.textContent = '🌑';
+        darkModeRail.style['border'] = '2px solid lightskyblue';
     } else {
+        darkModeRail.style['background'] = 'linear-gradient(315deg, rgba(103,223,255,1) 30%, rgba(253,187,45,1) 100%)';
         sunMoon.textContent = '🌞';
+        darkModeRail.style['border'] = '2px solid lightsteelblue';
     }
-
+    
 }
 
 function turnOff () {
@@ -387,7 +424,7 @@ function turnOff () {
 }
 
 
-const sunMoon = document.querySelector('.sun-moon');
+const sunMoon = document.querySelector('.darkmode-toggle');
 
 sunMoon.addEventListener('click', turnOff);
 
@@ -411,9 +448,12 @@ function pressLightBtn () {
 }
 
 function playBeep() {
+    
     const sound = document.querySelector('.audio-beep');
-    sound.currentTime = 0;
-    sound.play();
+    if (calculatorMode) {
+        sound.currentTime = 0;
+        sound.play();
+    }
 }
 
 /////////////////////////// ERROR DISPLAY ////////////////////////
@@ -460,11 +500,10 @@ function errorAlarm () {
     const topBar = document.querySelector('.top-bar');
     topBar.style['width'] = '100vw';
     title.style['font-size'] = '4rem';
-
-    emoji.remove();
+    const darkModeRail = document.querySelector('.darkmode-toggle');
+    darkModeRail.remove();
     
     const error = setInterval(() => {
-        
         title.textContent += 'ERROR! '; 
         timeDisplay.textContent = 'ERROR!';
     }, 50);
@@ -492,6 +531,10 @@ function errorAlarm () {
 
 window.addEventListener('keydown', (e) => {
 
+    if (calculatorMode) {
+
+    
+
     const keyToPress = document.querySelector(`button[data-key="${e.keyCode}"]`);
 
     if(keyToPress == null) return;
@@ -505,15 +548,20 @@ window.addEventListener('keydown', (e) => {
     playBeep();
 
     selectFunctionForKeyPress(e.keyCode);
+    }
 
   });
 
   window.addEventListener('keyup', (e) => {
+      if (calculatorMode) {
+
+      
     
     const keyToPress = document.querySelector(`button[data-key="${e.keyCode}"]`);
     if(keyToPress == null) return;
     keyToPress.classList.remove('btn-active');
     keyToPress.classList.remove('btn-top-active');
+      }
   });
   
 
@@ -585,3 +633,4 @@ function selectFunctionForKeyPress(key) {
     break;
   }
 }
+
