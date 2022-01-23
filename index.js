@@ -463,7 +463,6 @@ function errorAlarm () {
 
     emoji.remove();
     
-
     const error = setInterval(() => {
         
         title.textContent += 'ERROR! '; 
