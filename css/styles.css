@@ -219,24 +219,26 @@ a {
 }
 
 .btn-active{
-    background-color: rgb(26, 36, 36);
+    background-color: rgb(92, 92, 92);;
     color: rgb(155, 155, 155);
     box-shadow: -1px -1px 10px inset black;
 }
 .btn:active{
-    background-color: rgb(26, 36, 36);
+    background-color: rgb(92, 92, 92);;
     color: rgb(155, 155, 155);
     box-shadow: -1px -1px 10px inset black;
 }
 
 .btn-top {
-    background-color: steelblue;
+    background-color: rgb(111, 130, 160);
+    border: 1px solid rgb(37, 37, 37);
+    box-shadow: -1px -1px 10px inset rgb(31, 31, 31);
 }
 .btn-top-active {
-    background-color: rgb(0, 33, 59);
+    background-color: rgb(61, 71, 88);
 }
 .btn-top:active {
-    background-color: rgb(0, 33, 59);
+    background-color: rgb(61, 71, 88);
 }
 
 .lights-off {
