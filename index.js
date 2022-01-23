@@ -476,8 +476,8 @@ function errorAlarm () {
         watchDiv.style['transition'] = '5s';       
         watchDiv.style['color'] = 'black';
         watchDiv.style['background-color'] = 'black';  
-        bodyElement.style['transition'] = '5s';      
-    }, 5000);
+        bodyElement.style['transition'] = '2s';      
+    }, 4500);
 
     setTimeout(()=>{
         document.location.reload();

@@ -1,4 +1,10 @@
+:root {
+    font-size: 10px;
+}
+
 h1 {
+    position: fixed;
+    z-index: -1;
     font-family: 'Segment7', sans-serif;
     font-family: 'Bungee Hairline', sans-serif;
     font-family: 'Rationale', sans-serif;
@@ -12,12 +18,12 @@ h1 {
     }
 
 .time {
+    margin: 0 auto;
     font-family: 'Digital Numbers Regular', sans-serif;
-    font-size: 35px;
+    font-size: clamp(1.5rem, 3rem, 3rem);
 }
 
 body {
-    font-size: 400px;
     margin: auto;
     width: 100%;
     height: 100% vh;
@@ -26,17 +32,15 @@ body {
     transition: background-color 1s, color 1s;
 }
 
-
-
 .watch-div {
     margin: 50px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 10em;
+    width: clamp(31rem, 35rem, 40rem);
     background-color: rgb(90, 90,90);
-    height: 650px;
+    height: clamp(55rem, 60rem, 69rem);
     border-radius: 40px;
     box-shadow: 10px 10px 25px 1px rgb(90, 90,90);
     transition: background-color 1s, box-shadow 1s;
@@ -65,20 +69,20 @@ a {
 .casio {
     color: white;
     font-family: "Orbitron";
-    font-size: 25px;
+    font-size: 2rem;
     cursor: pointer;
     transition: color 1s;
 }
 .data-bank {
     color: gold;
-    font-size: 20px;
+    font-size: 1.5rem;
     font-style: italic;
     text-align: end;
     transition: color 1s;
 }
 .number-150 {
     font-weight: bolder;
-    font-size: 25px;
+    font-size: 1.9rem;
 }
 
 .illuminator {
@@ -86,6 +90,7 @@ a {
     grid-column-start: 1;
     grid-column-end: -1;
     letter-spacing: 3px;
+    font-size: 1.5rem;
     color: turquoise;
     font-style: italic;
     font-weight: bold;
@@ -99,7 +104,7 @@ a {
     border-radius: 12px;
     border: slategray inset 10px;
     height: 100px;
-    width: 15rem;
+    width: clamp(20rem, 23rem, 25rem);
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -114,8 +119,8 @@ a {
     justify-content: center;
     align-items: center;
     background-color: black;
-    width: 9em;
-    height: 7em;
+    width: clamp(28rem, 33rem, 38rem);
+    height: clamp(20rem, 25rem, 30rem);
     border-radius: 35px 35px 10px 10px;
     border: 2px outset grey;
     transition: border 1s;
@@ -136,7 +141,7 @@ a {
     padding: 0 0 0 10px;
     color: gold;
     font-style: italic;
-    font-size: 25px;   
+    font-size: 2.3rem;   
     width: 170px;
     height: 30px;
     background-color: rgb(0, 46, 71);
@@ -191,12 +196,14 @@ a {
 }
 
 .keyboard {
+    width: clamp(20rem, 30rem, 40rem);
+    height: clamp(20rem, 22rem, 45rem);
     margin: 10px 0 0;
     background-color: rgb(65, 65,65);
-    padding: 10px;
+    padding: clamp(0.1rem, 0.5rem, 0.6rem);
     display: grid;
     grid-template-columns: repeat(4, 75px);
-    grid-gap: 10px;
+    grid-gap: 1px;
     border: inset 2px rgb(100, 100,100);
     border-radius: 10px;
 }
@@ -205,8 +212,8 @@ a {
 }
 
 .btn {
-    width: 3.5em;
-    height: 2em;
+    width: clamp(3rem, 7rem, 10rem);
+    height: clamp(1rem, 4rem, 7rem);;
     background-color: gray;
     color: white;
     border-radius: 5px;
@@ -258,6 +265,7 @@ a {
 }
 
 h1 {
+    top: 5px;
     margin: 0;
     padding: 0;
     font-size: 1em;
@@ -279,7 +287,7 @@ h1 {
 }
 .backlight-red {
     z-index: 3;
-    animation: red-alarm 0.5s ease-in-out 17 forwards;
+    animation: red-alarm 0.5s ease-in-out 13 forwards;
 }
 
 @keyframes red-alarm {
@@ -325,6 +333,9 @@ h1 {
 
 }
 .sun-moon {
+    position: fixed;
+    top: 5px;
+    right: 0;
     cursor: pointer;
 }
 
@@ -345,12 +356,12 @@ h1 {
 
 
 .button-watch-assembly {
-    margin: auto;
+    margin: 40px auto;
     height: 100vh;
-    position: fixed;
+    /* position: fixed;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
     display: flex;
     flex-shrink: 3;
     justify-content: center;
@@ -362,11 +373,11 @@ h1 {
     color:white;
     padding: 15px 0;
     width: 20px;
-    height: 50px;
+    height: 6rem;
     border-radius: 15px 0 0 15px;
     border-right: none;
     position: relative;
-    bottom: 127px;
+    bottom: 11.5rem;
     transition: border 1s;
 }
 .mode-btn-lightsout {
@@ -378,7 +389,7 @@ h1 {
     right: 10px;
     color: white;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 1.2rem;
     writing-mode: vertical-lr;
     text-orientation: mixed;
     transition: 1s;
