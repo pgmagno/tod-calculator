@@ -13,7 +13,7 @@
 .time {
     margin: 0 auto;
     font-family: 'Digital Numbers Regular', sans-serif;
-    font-size: clamp(1.5rem, 3rem, 3rem);
+    font-size: clamp(1.5rem, 3.2rem, 3.5rem);
 }
 
 body {

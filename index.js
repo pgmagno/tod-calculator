@@ -457,12 +457,18 @@ function errorAlarm () {
 
     const title = document.querySelector('h1');
     const emoji = document.querySelector('.sun-moon');
+    const topBar = document.querySelector('.top-bar');
+    topBar.style['width'] = '100vw';
+    title.style['font-size'] = '4rem';
+
     emoji.remove();
+    
 
     const error = setInterval(() => {
+        
         title.textContent += 'ERROR! '; 
         timeDisplay.textContent = 'ERROR!';
-    }, 100);
+    }, 50);
 
     setTimeout(() =>{
         bodyElement.style['background-color'] = 'red';
