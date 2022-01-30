@@ -346,22 +346,6 @@ h1 {
     font-size: 4rem;
 }
 
-
-#overlay {
-    position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.3); /* Black background with opacity */
-    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
-  }
-
-
 .button-watch-assembly {
     margin: 40px auto;
     height: 94vh;
@@ -430,7 +414,7 @@ h1 {
     align-items: center;
     height: 3rem;
     font-size: 1rem;
-    padding: 0 3px  ;
+    padding: 0 0px 0 9px;
     margin: 0;
     width: 5rem;
     border: 2px solid lightsteelblue;
@@ -439,10 +423,23 @@ h1 {
     transition: 0.1s;
     cursor: pointer;
 }
-.sun-moon {
+.sun {
+    background-color: gold;
+    box-shadow: 1px 1px 0px rgb(252, 232, 84), -1px -1px 0px rgb(252, 232, 84),
+    -1px 1px 0px rgb(252, 232, 84),
+    1px -1px 0px rgb(252, 232, 84);
+}
+.moon {
+    background-color:rgb(255, 255, 117);
+    box-shadow: 1px 1px 0px lightyellow, -1px -1px 0px lightyellow,
+    -1px 1px 0px lightyellow,
+    1px -1px 0px lightyellow;
+}
+
+.sun-moon {    
     padding: 0;
     margin: 0;
-    height: 3rem;
+    height: 2rem;
     width: 2rem;
     border-radius: 50%;
     font-size: 2rem;
@@ -462,4 +459,11 @@ h1 {
     0% {
         transform: translateX(100%);
     }
+}
+
+.github {
+    letter-spacing: 2px;
+    color: inherit;
+    transition: 0.1s;
+    background-color: transparent;
 }

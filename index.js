@@ -401,16 +401,20 @@ function replaceTitle (msg) {
 
 function toggleDarkModeIcon () {
 
+    
+
     const sunMoon = document.querySelector('.sun-moon');
     const darkModeRail = document.querySelector('.darkmode-toggle');
     sunMoon.classList.toggle('animated');
-    if (sunMoon.textContent === '🌞') {
+    if (!lightsOutStatus) {
         darkModeRail.style['background'] = 'linear-gradient(315deg, rgba(105,150,255,1) 0%, rgba(13,46,64,1) 100%)';
-        sunMoon.textContent = '🌑';
         darkModeRail.style['border'] = '2px solid lightskyblue';
+        sunMoon.classList.toggle('moon');
+        sunMoon.classList.toggle('sun');
     } else {
+        sunMoon.classList.toggle('sun');
+        sunMoon.classList.toggle('moon');
         darkModeRail.style['background'] = 'linear-gradient(315deg, rgba(103,223,255,1) 30%, rgba(253,187,45,1) 100%)';
-        sunMoon.textContent = '🌞';
         darkModeRail.style['border'] = '2px solid lightsteelblue';
     }
     
